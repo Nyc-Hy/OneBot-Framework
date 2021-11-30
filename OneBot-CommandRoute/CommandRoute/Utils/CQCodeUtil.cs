@@ -1,12 +1,12 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using Newtonsoft.Json;
 using Sora.Entities;
-using Sora.Entities.MessageElement;
-using Sora.Entities.MessageElement.CQModel;
+using Sora.Entities.Segment;
+using Sora.Entities.Segment.DataModel;
 using Sora.Enumeration;
 
 namespace OneBot.CommandRoute.Utils
@@ -21,7 +21,7 @@ namespace OneBot.CommandRoute.Utils
         public static string Serialize(this MessageBody msg)
         {
             var ret = "";
-            foreach (CQCode msgSeg in msg)
+            foreach (SoraSegment msgSeg in msg)
             {
                 ret += msgSeg.Serialize();
             }
@@ -34,11 +34,11 @@ namespace OneBot.CommandRoute.Utils
         /// </summary>
         /// <param name="msg"></param>
         /// <returns></returns>
-        public static string Serialize(this CQCode msg)
+        public static string Serialize(this SoraSegment msg)
         {
-            if (msg.MessageType == CQType.Text)
+            if (msg.MessageType == SegmentType.Text)
             {
-                return ((Text)(msg.DataObject)).Content.CQCodeEncode(comma: false);
+                return ((TextSegment)(msg.Data)).Content.CQCodeEncode(comma: false);
             }
 
             var ret = new StringBuilder();
@@ -60,7 +60,7 @@ namespace OneBot.CommandRoute.Utils
             ret.Append(description);
 
 
-            var data = msg.DataObject;
+            var data = msg.Data;
             var dataType = data.GetType();
             var dataFields = dataType.GetProperties();
 

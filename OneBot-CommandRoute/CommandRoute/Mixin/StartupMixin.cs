@@ -3,7 +3,7 @@ using OneBot.CommandRoute.OneBotControllers;
 using OneBot.CommandRoute.Services;
 using OneBot.CommandRoute.Services.Implements;
 using OneBot.CommandRoute.Utils;
-using YukariToolBox.FormatLog;
+using YukariToolBox.LightLog;
 
 namespace OneBot_CommandRoute.CommandRoute.Mixin
 {
