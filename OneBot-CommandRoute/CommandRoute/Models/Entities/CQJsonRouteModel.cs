@@ -80,7 +80,8 @@ namespace OneBot.CommandRoute.Models.Entities
                 var attrs = System.Attribute.GetCustomAttributes(CommandMethod, typeof(BeforeCommandAttribute));
                 for (int i = 0; i < attrs.Length; i++)
                 {
-                    (attrs[i] as BeforeCommandAttribute)?.Invoke(scope, baseSoraEventArgs);
+                    var resint = (attrs[i] as BeforeCommandAttribute)?.Invoke(scope, baseSoraEventArgs);
+                    return resint.GetValueOrDefault();
                 }
             }
 
